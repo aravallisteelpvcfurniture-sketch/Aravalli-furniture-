@@ -1,0 +1,6 @@
+{
+  "name": "Aravalli Furniture",
+  "description": "Showroom and dealer management app for Aravalli Steel & PVC Furniture - Estimates, Orders, Visitors, Carpenters, and Sales Tracking",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

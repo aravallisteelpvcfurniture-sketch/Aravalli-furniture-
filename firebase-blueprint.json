@@ -1,0 +1,134 @@
+{
+  "entities": {
+    "Estimate": {
+      "title": "Estimate",
+      "description": "Quotation for PVC and Steel furniture",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "customerAddress": { "type": "string" },
+        "productType": { "type": "string" },
+        "dimensions": { "type": "string" },
+        "areaSqFt": { "type": "number" },
+        "ratePerSqFt": { "type": "number" },
+        "hardwareCost": { "type": "number" },
+        "discountAmount": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "createdDate": { "type": "string" },
+        "status": { "type": "string" },
+        "items": { "type": "array" },
+        "notes": { "type": "string" }
+      },
+      "required": ["userId", "customerName", "customerPhone", "productType", "totalAmount"]
+    },
+    "ConfirmedOrder": {
+      "title": "ConfirmedOrder",
+      "description": "Confirmed production and delivery order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "deliveryAddress": { "type": "string" },
+        "productSummary": { "type": "string" },
+        "totalAmount": { "type": "number" },
+        "advancePaid": { "type": "number" },
+        "balanceDue": { "type": "number" },
+        "orderDate": { "type": "string" },
+        "deliveryDate": { "type": "string" },
+        "stage": { "type": "string" },
+        "paymentMode": { "type": "string" }
+      },
+      "required": ["userId", "orderNumber", "customerName", "customerPhone", "totalAmount"]
+    },
+    "Visitor": {
+      "title": "Visitor",
+      "description": "Showroom visitor and inquiry record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "visitDate": { "type": "string" },
+        "interestedProduct": { "type": "string" },
+        "budget": { "type": "string" },
+        "priority": { "type": "string" },
+        "followUpDate": { "type": "string" },
+        "notes": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["userId", "name", "phone"]
+    },
+    "Carpenter": {
+      "title": "Carpenter",
+      "description": "Carpenter Mitra club partner with contact details and project assignments",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "location": { "type": "string" },
+        "specialty": { "type": "string" },
+        "experienceYears": { "type": "number" },
+        "tier": { "type": "string" },
+        "totalReferrals": { "type": "number" },
+        "pointsEarned": { "type": "number" },
+        "totalCommissionEarned": { "type": "number" },
+        "pendingPayout": { "type": "number" },
+        "activeProjectsCount": { "type": "number" },
+        "joinDate": { "type": "string" }
+      },
+      "required": ["userId", "name", "phone"]
+    },
+    "CarpenterProject": {
+      "title": "CarpenterProject",
+      "description": "Project assignment allocated to a carpenter",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "carpenterId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "clientPhone": { "type": "string" },
+        "siteAddress": { "type": "string" },
+        "workType": { "type": "string" },
+        "laborCharge": { "type": "number" },
+        "advancePaid": { "type": "number" },
+        "assignedDate": { "type": "string" },
+        "targetCompletionDate": { "type": "string" },
+        "status": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["carpenterId", "clientName", "workType", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/estimates/{estimateId}": {
+      "schema": { "$ref": "#/entities/Estimate" },
+      "description": "Estimates and quotations created by the user"
+    },
+    "/users/{userId}/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/ConfirmedOrder" },
+      "description": "Confirmed production orders"
+    },
+    "/users/{userId}/visitors/{visitorId}": {
+      "schema": { "$ref": "#/entities/Visitor" },
+      "description": "Showroom visitors and inquiries"
+    },
+    "/users/{userId}/carpenters/{carpenterId}": {
+      "schema": { "$ref": "#/entities/Carpenter" },
+      "description": "Carpenter partner network directory"
+    },
+    "/users/{userId}/carpenters/{carpenterId}/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/CarpenterProject" },
+      "description": "Project assignments assigned to this carpenter"
+    }
+  }
+}
